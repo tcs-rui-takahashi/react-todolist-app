@@ -15,7 +15,7 @@ export default function TodoItem({
 }: TodoItemProps) {
   return (
     <div
-      className="flex items-center gap-3 px-3 py-2 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800"
+      className="flex items-center gap-3 px-3 py-2 rounded-lg border hover:bg-gray-300 dark:hover:bg-gray-800"
       role="listitem"
     >
       <input
