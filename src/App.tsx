@@ -1,35 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import TodoItem from "./components/TodoItem";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  const dummy = { id: "1", title: "Build TodoItem skeleton", completed: false };
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main className="max-w-xl mx-auto p-4">
+      <h1 className="text-xl font-semibold mb-3">Todo</h1>
+      <div className="space-y-2" role="list">
+        <TodoItem
+          id={`todo-item-${dummy.id}`}
+          title={dummy.title}
+          completed={dummy.completed}
+          onToggle={(completed) =>
+            console.log("toggle", dummy.id, "->", completed)
+          }
+          onDelete={() => console.log("delete", dummy.id)}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </main>
+  );
 }
-
-export default App
