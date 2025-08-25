@@ -7,6 +7,7 @@ export default function App() {
       <h1 className="text-xl font-semibold mb-3">Todo</h1>
       <div className="space-y-2" role="list">
         <TodoItem
+          id={`todo-item-${dummy.id}`}
           title={dummy.title}
           completed={dummy.completed}
           onToggle={(completed) =>

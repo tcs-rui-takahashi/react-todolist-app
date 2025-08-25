@@ -1,6 +1,5 @@
-import { useId } from "react";
-
 type TodoItemProps = {
+  id: string;
   title: string;
   completed: boolean;
   onToggle: (completed: boolean) => void;
@@ -8,26 +7,25 @@ type TodoItemProps = {
 };
 
 export default function TodoItem({
+  id,
   title,
   completed,
   onToggle,
   onDelete,
 }: TodoItemProps) {
-  const uid = useId();
-
   return (
     <div
       className="flex items-center gap-3 px-3 py-2 rounded-lg border hover:bg-gray-300 dark:hover:bg-gray-800"
       role="listitem"
     >
       <input
-        id={uid}
+        id={id}
         type="checkbox"
         checked={completed}
         onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4"
       />
-      <label htmlFor={uid} className="flex-1 text-sm md:text-base">
+      <label htmlFor={id} className="flex-1 text-sm md:text-base">
         {title}
       </label>
       <button
