@@ -7,10 +7,9 @@ export default function App() {
       <h1 className="text-xl font-semibold mb-3">Todo</h1>
       <div className="space-y-2" role="list">
         <TodoItem
-          id={dummy.id}
           title={dummy.title}
           completed={dummy.completed}
-          onToggle={() => console.log("toggle", dummy.id)}
+          onToggle={(next) => console.log("toggle", dummy.id, "->", next)}
           onDelete={() => console.log("delete", dummy.id)}
         />
       </div>
