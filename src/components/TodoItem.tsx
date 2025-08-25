@@ -1,3 +1,5 @@
+import { cn } from "../lib/cn";
+
 type TodoItemProps = {
   id: string;
   title: string;
@@ -23,13 +25,14 @@ export default function TodoItem({
         type="checkbox"
         checked={completed}
         onChange={(e) => onToggle(e.target.checked)}
-        className="h-4 w-4"
+        className={cn("h-4 w-4")}
       />
       <label
         htmlFor={id}
-        className={`flex-1 text-sm md:text-base ${
-          completed ? "line-through text-gray-400 opacity-60" : ""
-        }`}
+        className={cn(
+          "flex-1 text-sm md:text-base",
+          completed && "line-through text-gray-400 opacity-60"
+        )}
       >
         {title}
       </label>
@@ -37,7 +40,11 @@ export default function TodoItem({
         type="button"
         onClick={onDelete}
         aria-label="Delete todo"
-        className="text-sm px-2 py-1 rounded-md border hover:bg-gray-100 dark:hover:bg-gray-700"
+        className={cn(
+          "text-sm px-2 py-1 rounded-md border",
+          " hover:bg-gray-100 dark:hover:bg-gray-700",
+          completed && "opacity-80"
+        )}
       >
         Delete
       </button>
