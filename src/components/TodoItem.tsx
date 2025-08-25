@@ -25,7 +25,12 @@ export default function TodoItem({
         onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4"
       />
-      <label htmlFor={id} className="flex-1 text-sm md:text-base">
+      <label
+        htmlFor={id}
+        className={`flex-1 text-sm md:text-base ${
+          completed ? "line-through text-gray-400 opacity-60" : ""
+        }`}
+      >
         {title}
       </label>
       <button
