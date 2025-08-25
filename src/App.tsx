@@ -9,7 +9,9 @@ export default function App() {
         <TodoItem
           title={dummy.title}
           completed={dummy.completed}
-          onToggle={(next) => console.log("toggle", dummy.id, "->", next)}
+          onToggle={(completed) =>
+            console.log("toggle", dummy.id, "->", completed)
+          }
           onDelete={() => console.log("delete", dummy.id)}
         />
       </div>

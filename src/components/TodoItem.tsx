@@ -3,7 +3,7 @@ import { useId } from "react";
 type TodoItemProps = {
   title: string;
   completed: boolean;
-  onToggle: (next: boolean) => void;
+  onToggle: (completed: boolean) => void;
   onDelete: () => void;
 };
 
