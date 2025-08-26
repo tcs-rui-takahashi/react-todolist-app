@@ -1,3 +1,5 @@
+import { cn } from "../lib/cn";
+
 type TodoItemProps = {
   id: string;
   title: string;
@@ -25,7 +27,13 @@ export default function TodoItem({
         onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4"
       />
-      <label htmlFor={id} className="flex-1 text-sm md:text-base">
+      <label
+        htmlFor={id}
+        className={cn(
+          "flex-1 text-sm md:text-base",
+          completed && "line-through text-gray-400 opacity-60"
+        )}
+      >
         {title}
       </label>
       <button
