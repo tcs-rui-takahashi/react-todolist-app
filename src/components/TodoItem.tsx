@@ -25,7 +25,7 @@ export default function TodoItem({
         type="checkbox"
         checked={completed}
         onChange={(e) => onToggle(e.target.checked)}
-        className={cn("h-4 w-4")}
+        className="h-4 w-4"
       />
       <label
         htmlFor={id}
@@ -40,11 +40,7 @@ export default function TodoItem({
         type="button"
         onClick={onDelete}
         aria-label="Delete todo"
-        className={cn(
-          "text-sm px-2 py-1 rounded-md border",
-          " hover:bg-gray-100 dark:hover:bg-gray-700",
-          completed && "opacity-80"
-        )}
+        className="text-sm px-2 py-1 rounded-md border hover:bg-gray-100 dark:hover:bg-gray-700"
       >
         Delete
       </button>
