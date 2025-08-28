@@ -1,15 +1,17 @@
 import { cn } from "../lib/cn";
 
 type TodoItemProps = {
-  id: string;
+  itemId: string;
+  inputId: string;
   title: string;
   completed: boolean;
-  onToggle: (completed: boolean) => void;
-  onDelete: () => void;
+  onToggle: (id: string, completed: boolean) => void;
+  onDelete: (id: string) => void;
 };
 
 export default function TodoItem({
-  id,
+  itemId,
+  inputId,
   title,
   completed,
   onToggle,
@@ -21,14 +23,14 @@ export default function TodoItem({
       role="listitem"
     >
       <input
-        id={id}
+        id={inputId}
         type="checkbox"
         checked={completed}
-        onChange={(e) => onToggle(e.target.checked)}
+        onChange={(e) => onToggle(itemId, e.target.checked)}
         className="h-4 w-4 focus-visible:outline-1 focus-visible:outline-blue-600"
       />
       <label
-        htmlFor={id}
+        htmlFor={inputId}
         className={cn(
           "flex-1 text-sm md:text-base",
           completed && "line-through text-gray-400 opacity-60"
@@ -38,7 +40,7 @@ export default function TodoItem({
       </label>
       <button
         type="button"
-        onClick={onDelete}
+        onClick={() => onDelete(itemId)}
         aria-label="Delete todo"
         className="text-sm px-2 py-1 rounded-md border hover:bg-gray-100 dark:hover:bg-gray-700 focus-visible:outline-1 focus-visible:outline-blue-600"
       >
