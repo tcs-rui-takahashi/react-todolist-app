@@ -15,7 +15,7 @@ export default function TodoItem({
   onToggle,
   onDelete,
 }: TodoItemProps) {
-  const htmlId = `todo-item-${id}`;
+  const inputId = `todo-item-${id}`;
 
   return (
     <div
@@ -23,14 +23,14 @@ export default function TodoItem({
       role="listitem"
     >
       <input
-        id={htmlId}
+        id={inputId}
         type="checkbox"
         checked={completed}
         onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4 focus-visible:outline-1 focus-visible:outline-blue-600"
       />
       <label
-        htmlFor={htmlId}
+        htmlFor={inputId}
         className={cn(
           "flex-1 text-sm md:text-base",
           completed && "line-through text-gray-400 opacity-60"
