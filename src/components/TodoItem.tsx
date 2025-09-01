@@ -1,7 +1,7 @@
 import { cn } from "../lib/cn";
 
 type TodoItemProps = {
-  inputId: string;
+  id: string;
   title: string;
   completed: boolean;
   onToggle: (completed: boolean) => void;
@@ -9,26 +9,28 @@ type TodoItemProps = {
 };
 
 export default function TodoItem({
-  inputId,
+  id,
   title,
   completed,
   onToggle,
   onDelete,
 }: TodoItemProps) {
+  const htmlId = `todo-item-${id}`;
+
   return (
     <div
       className="flex items-center gap-3 px-3 py-2 rounded-lg border hover:bg-gray-300 dark:hover:bg-gray-800"
       role="listitem"
     >
       <input
-        id={inputId}
+        id={htmlId}
         type="checkbox"
         checked={completed}
         onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4 focus-visible:outline-1 focus-visible:outline-blue-600"
       />
       <label
-        htmlFor={inputId}
+        htmlFor={htmlId}
         className={cn(
           "flex-1 text-sm md:text-base",
           completed && "line-through text-gray-400 opacity-60"

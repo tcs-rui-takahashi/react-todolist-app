@@ -26,7 +26,7 @@ export default function App() {
       <div className="space-y-2" role="list">
         {todos.map((t) => (
           <TodoItem
-            inputId={`todo-item-${t.id}`}
+            id={t.id}
             title={t.title}
             completed={t.completed}
             onToggle={(completed) => handleToggle(t.id, completed)}
