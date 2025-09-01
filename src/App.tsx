@@ -26,7 +26,6 @@ export default function App() {
       <div className="space-y-2" role="list">
         {todos.map((t) => (
           <TodoItem
-            itemId={t.id}
             inputId={`todo-item-${t.id}`}
             title={t.title}
             completed={t.completed}

@@ -1,7 +1,6 @@
 import { cn } from "../lib/cn";
 
 type TodoItemProps = {
-  itemId: string;
   inputId: string;
   title: string;
   completed: boolean;
@@ -10,7 +9,6 @@ type TodoItemProps = {
 };
 
 export default function TodoItem({
-  itemId,
   inputId,
   title,
   completed,
