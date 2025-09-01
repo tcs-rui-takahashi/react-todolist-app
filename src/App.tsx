@@ -30,8 +30,8 @@ export default function App() {
             inputId={`todo-item-${t.id}`}
             title={t.title}
             completed={t.completed}
-            onToggle={handleToggle}
-            onDelete={handleDelete}
+            onToggle={(completed) => handleToggle(t.id, completed)}
+            onDelete={() => handleDelete(t.id)}
           />
         ))}
       </div>

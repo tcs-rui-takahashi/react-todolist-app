@@ -5,8 +5,8 @@ type TodoItemProps = {
   inputId: string;
   title: string;
   completed: boolean;
-  onToggle: (id: string, completed: boolean) => void;
-  onDelete: (id: string) => void;
+  onToggle: (completed: boolean) => void;
+  onDelete: () => void;
 };
 
 export default function TodoItem({
@@ -26,7 +26,7 @@ export default function TodoItem({
         id={inputId}
         type="checkbox"
         checked={completed}
-        onChange={(e) => onToggle(itemId, e.target.checked)}
+        onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4 focus-visible:outline-1 focus-visible:outline-blue-600"
       />
       <label
@@ -40,7 +40,7 @@ export default function TodoItem({
       </label>
       <button
         type="button"
-        onClick={() => onDelete(itemId)}
+        onClick={() => onDelete()}
         aria-label="Delete todo"
         className="text-sm px-2 py-1 rounded-md border hover:bg-gray-100 dark:hover:bg-gray-700 focus-visible:outline-1 focus-visible:outline-blue-600"
       >
