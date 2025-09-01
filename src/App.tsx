@@ -23,7 +23,7 @@ export default function App() {
   return (
     <main className="max-w-xl mx-auto p-4">
       <h1 className="text-xl font-semibold mb-3">Todo</h1>
-      <div className="space-y-2" role="list">
+      <div className="space-y-2 md:space-y-3" role="list">
         {todos.map((t) => (
           <TodoItem
             id={t.id}
