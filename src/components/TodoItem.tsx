@@ -32,7 +32,7 @@ export default function TodoItem({
       <label
         htmlFor={inputId}
         className={cn(
-          "flex-1 text-sm md:text-base",
+          "flex-1 text-sm",
           completed && "line-through text-gray-400 opacity-60"
         )}
       >
