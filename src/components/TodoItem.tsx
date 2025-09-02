@@ -19,7 +19,7 @@ export default function TodoItem({
 
   return (
     <div
-      className="flex items-center gap-3 px-3 py-2 rounded-lg border hover:bg-gray-300 dark:hover:bg-gray-800"
+      className="flex items-center gap-3 px-3 py-2 rounded-xl ring-1 ring-gray-200 transition-colors hover:bg-gray-50 hover:ring-gray-300 dark:hover:bg-gray-800"
       role="listitem"
     >
       <input
@@ -32,7 +32,7 @@ export default function TodoItem({
       <label
         htmlFor={inputId}
         className={cn(
-          "flex-1 text-sm md:text-base",
+          "flex-1 text-sm",
           completed && "line-through text-gray-400 opacity-60"
         )}
       >
