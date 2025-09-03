@@ -17,7 +17,7 @@ export default function TodoComposer() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add a new task"
-        aria-label="Todo title"
+        aria-label="Add a task"
         className="w-full rounded-md border px-3 py-2 focus-visible:outline-1 focus-visible:outline-blue-600 focus-visible:outline-offset-2"
       />
     </form>
