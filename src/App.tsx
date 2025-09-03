@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TodoItem from "./components/TodoItem";
+import TodoComposer from "./components/TodoComposer";
 
 type Todo = { id: string; title: string; completed: boolean };
 
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <main className="max-w-xl mx-auto p-4">
       <h1 className="text-xl font-semibold mb-3">Todo</h1>
+      <TodoComposer />
       <div className="space-y-2" role="list">
         {todos.map((t) => (
           <TodoItem
