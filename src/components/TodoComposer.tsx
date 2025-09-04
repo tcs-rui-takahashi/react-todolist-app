@@ -2,13 +2,23 @@ import { useState } from "react";
 
 export default function TodoComposer() {
   const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = title.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      setError("Task cannot be empty");
+      return;
+    }
+    if (trimmed.length < 3) {
+      setError("Task must be at least 3 characters long");
+      return;
+    }
+
     console.log("[TodoComposer] add:", trimmed);
     setTitle("");
+    setError("");
   };
 
   return (
@@ -20,6 +30,11 @@ export default function TodoComposer() {
         aria-label="Add a task"
         className="w-full rounded-md border px-3 py-2 focus-visible:outline-1 focus-visible:outline-blue-600 focus-visible:outline-offset-2"
       />
+      {error && (
+        <p className="mt-1 text-sm text-red-600" role="alert">
+          {error}
+        </p>
+      )}
     </form>
   );
 }
