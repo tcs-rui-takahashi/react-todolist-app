@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoComposer from "./components/TodoComposer";
 
-type Todo = { id: string; title: string; completed: boolean };
+import type { Todo } from "./types/todo";
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([
