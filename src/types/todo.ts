@@ -1,7 +1,5 @@
-export type TodoId = string;
-
 export type Todo = {
-  id: TodoId;
+  id: string;
   title: string;
   completed: boolean;
 };
