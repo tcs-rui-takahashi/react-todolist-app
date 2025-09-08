@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoComposer from "./components/TodoComposer";
 
-type Todo = { id: string; title: string; completed: boolean };
+import type { Todo } from "./types/todo";
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -28,9 +28,7 @@ export default function App() {
       <div className="space-y-2" role="list">
         {todos.map((t) => (
           <TodoItem
-            id={t.id}
-            title={t.title}
-            completed={t.completed}
+            todo={t}
             onToggle={(completed) => handleToggle(t.id, completed)}
             onDelete={() => handleDelete(t.id)}
           />

@@ -1,21 +1,14 @@
 import { cn } from "../lib/cn";
+import type { Todo } from "../types/todo";
 
-type TodoItemProps = {
-  id: string;
-  title: string;
-  completed: boolean;
+export type TodoItemProps = {
+  todo: Todo;
   onToggle: (completed: boolean) => void;
   onDelete: () => void;
 };
 
-export default function TodoItem({
-  id,
-  title,
-  completed,
-  onToggle,
-  onDelete,
-}: TodoItemProps) {
-  const inputId = `todo-item-${id}`;
+export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
+  const inputId = `todo-item-${todo.id}`;
 
   return (
     <div
@@ -25,7 +18,7 @@ export default function TodoItem({
       <input
         id={inputId}
         type="checkbox"
-        checked={completed}
+        checked={todo.completed}
         onChange={(e) => onToggle(e.target.checked)}
         className="h-4 w-4 focus-visible:outline-1 focus-visible:outline-blue-600"
       />
@@ -33,10 +26,10 @@ export default function TodoItem({
         htmlFor={inputId}
         className={cn(
           "flex-1 text-sm",
-          completed && "line-through text-gray-400 opacity-60"
+          todo.completed && "line-through text-gray-400 opacity-60"
         )}
       >
-        {title}
+        {todo.title}
       </label>
       <button
         type="button"
