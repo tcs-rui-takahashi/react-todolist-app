@@ -11,6 +11,15 @@ export default function App() {
     { id: "3", title: "Render with map()", completed: false },
   ]);
 
+  const handleAdd = (title: string) => {
+    const newTodo: Todo = {
+      id: crypto.randomUUID(),
+      title,
+      completed: false,
+    };
+    setTodos((prev) => [newTodo, ...prev]);
+  };
+
   const handleToggle = (id: string, nextCompleted: boolean) => {
     setTodos((prev) =>
       prev.map((t) => (t.id === id ? { ...t, completed: nextCompleted } : t))
@@ -24,7 +33,7 @@ export default function App() {
   return (
     <main className="max-w-xl mx-auto p-4">
       <h1 className="text-xl font-semibold mb-3">Todo</h1>
-      <TodoComposer />
+      <TodoComposer onAdd={handleAdd} />
       <div className="space-y-2" role="list">
         {todos.map((t) => (
           <TodoItem

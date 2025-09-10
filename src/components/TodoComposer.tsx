@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export default function TodoComposer() {
+type Props = {
+  onAdd: (title: string) => void;
+};
+
+export default function TodoComposer({ onAdd }: Props) {
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
 
@@ -16,7 +20,7 @@ export default function TodoComposer() {
       return;
     }
 
-    console.log("[TodoComposer] add:", trimmed);
+    onAdd(trimmed);
     setTitle("");
     setError("");
   };
@@ -25,7 +29,10 @@ export default function TodoComposer() {
     <form onSubmit={handleSubmit} className="mb-3">
       <input
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          if (error) setError("");
+        }}
         placeholder="Add a new task"
         aria-label="Add a task"
         className="w-full rounded-md border px-3 py-2 focus-visible:outline-1 focus-visible:outline-blue-600 focus-visible:outline-offset-2"
