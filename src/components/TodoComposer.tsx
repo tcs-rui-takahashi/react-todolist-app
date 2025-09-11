@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { validateTitle } from "../lib/validateTodo";
 
 type Props = {
   onAdd: (title: string) => void;
@@ -6,23 +7,20 @@ type Props = {
 
 export default function TodoComposer({ onAdd }: Props) {
   const [title, setTitle] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmed = title.trim();
-    if (!trimmed) {
-      setError("Task cannot be empty");
-      return;
-    }
-    if (trimmed.length < 3) {
-      setError("Task must be at least 3 characters long");
+
+    const err = validateTitle(title);
+    if (err) {
+      setError(err);
       return;
     }
 
-    onAdd(trimmed);
+    onAdd(title.trim());
     setTitle("");
-    setError("");
+    setError(null);
   };
 
   return (
@@ -31,7 +29,7 @@ export default function TodoComposer({ onAdd }: Props) {
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);
-          if (error) setError("");
+          if (error) setError(null);
         }}
         placeholder="Add a new task"
         aria-label="Add a task"
