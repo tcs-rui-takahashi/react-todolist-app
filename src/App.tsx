@@ -37,6 +37,7 @@ export default function App() {
       <div className="space-y-2" role="list">
         {todos.map((t) => (
           <TodoItem
+            key={t.id}
             todo={t}
             onToggle={(completed) => handleToggle(t.id, completed)}
             onDelete={() => handleDelete(t.id)}
