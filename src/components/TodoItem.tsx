@@ -25,7 +25,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
       <label
         htmlFor={inputId}
         className={cn(
-          "flex-1 text-sm",
+          "flex-1 min-w-0 text-sm break-words",
           todo.completed && "line-through text-gray-400 opacity-60"
         )}
       >

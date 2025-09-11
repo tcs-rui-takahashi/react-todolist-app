@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <main className="max-w-xl mx-auto p-4">
+    <main className="w-[480px] mx-auto p-4">
       <h1 className="text-xl font-semibold mb-3">Todo</h1>
       <TodoComposer onAdd={handleAdd} />
       <div className="space-y-2" role="list">
