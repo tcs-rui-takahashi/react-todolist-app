@@ -13,14 +13,12 @@ export default function TodoComposer({ onAdd }: Props) {
     e.preventDefault();
 
     const err = getTitleValidationError(title);
-    if (err) {
-      setError(err);
-      return;
-    }
+    setError(err);
 
-    onAdd(title.trim());
-    setTitle("");
-    setError(null);
+    if (!err) {
+      onAdd(title.trim());
+      setTitle("");
+    }
   };
 
   return (
