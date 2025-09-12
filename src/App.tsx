@@ -6,9 +6,13 @@ import type { Todo } from "./types/todo";
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([
-    { id: "1", title: "Build TodoItem skeleton", completed: false },
-    { id: "2", title: "Wire callbacks", completed: true },
-    { id: "3", title: "Render with map()", completed: false },
+    {
+      id: crypto.randomUUID(),
+      title: "Build TodoItem skeleton",
+      completed: false,
+    },
+    { id: crypto.randomUUID(), title: "Wire callbacks", completed: true },
+    { id: crypto.randomUUID(), title: "Render with map()", completed: false },
   ]);
 
   const handleAdd = (title: string) => {
