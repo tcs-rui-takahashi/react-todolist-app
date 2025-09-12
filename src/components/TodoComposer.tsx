@@ -1,31 +1,35 @@
 import { useState } from "react";
+import { getTitleValidationError } from "../lib/validateTodo";
 
-export default function TodoComposer() {
+type Props = {
+  onAdd: (title: string) => void;
+};
+
+export default function TodoComposer({ onAdd }: Props) {
   const [title, setTitle] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmed = title.trim();
-    if (!trimmed) {
-      setError("Task cannot be empty");
-      return;
-    }
-    if (trimmed.length < 3) {
-      setError("Task must be at least 3 characters long");
-      return;
-    }
 
-    console.log("[TodoComposer] add:", trimmed);
-    setTitle("");
-    setError("");
+    const trimmed = title.trim();
+    const err = getTitleValidationError(trimmed);
+    setError(err);
+
+    if (!err) {
+      onAdd(trimmed);
+      setTitle("");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="mb-3">
       <input
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          if (error) setError(null);
+        }}
         placeholder="Add a new task"
         aria-label="Add a task"
         className="w-full rounded-md border px-3 py-2 focus-visible:outline-1 focus-visible:outline-blue-600 focus-visible:outline-offset-2"
