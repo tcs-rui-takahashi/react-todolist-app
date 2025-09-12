@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { validateTitle } from "../lib/validateTodo";
+import { getTitleValidationError } from "../lib/validateTodo";
 
 type Props = {
   onAdd: (title: string) => void;
@@ -12,7 +12,7 @@ export default function TodoComposer({ onAdd }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const err = validateTitle(title);
+    const err = getTitleValidationError(title);
     if (err) {
       setError(err);
       return;
