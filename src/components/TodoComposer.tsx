@@ -12,11 +12,12 @@ export default function TodoComposer({ onAdd }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const err = getTitleValidationError(title);
+    const trimmed = title.trim();
+    const err = getTitleValidationError(trimmed);
     setError(err);
 
     if (!err) {
-      onAdd(title.trim());
+      onAdd(trimmed);
       setTitle("");
     }
   };
