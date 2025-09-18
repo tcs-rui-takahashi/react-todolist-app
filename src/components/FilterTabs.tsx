@@ -26,9 +26,6 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
             key={key}
             type="button"
             aria-pressed={isActive}
-            aria-label={`${label}${
-              typeof badge === "number" ? ` (${badge})` : ""
-            }`}
             onClick={() => onChange(key)}
             className={cn(
               "px-3 py-1.5 rounded-xl ring-1 transition-colors text-sm",
