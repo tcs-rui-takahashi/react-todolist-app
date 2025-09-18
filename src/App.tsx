@@ -2,7 +2,7 @@ import { useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoComposer from "./components/TodoComposer";
 import FilterTabs from "./components/FilterTabs";
-
+import { applyFilter, countByFilter } from "./utils/filters";
 import type { Todo } from "./types/todo";
 import type { FilterTab } from "./types/filter";
 
@@ -38,17 +38,8 @@ export default function App() {
     setTodos((prev) => prev.filter((t) => t.id !== id));
   };
 
-  const visibleTodos = todos.filter((t) => {
-    if (filter === "active") return !t.completed;
-    if (filter === "completed") return t.completed;
-    return true;
-  });
-
-  const counts = {
-    all: todos.length,
-    active: todos.filter((t) => !t.completed).length,
-    completed: todos.filter((t) => t.completed).length,
-  };
+  const counts = countByFilter(todos);
+  const filteredTodos = applyFilter(todos, filter);
 
   return (
     <main className="w-[480px] mx-auto p-4">
@@ -62,7 +53,7 @@ export default function App() {
       </div>
       <TodoComposer onAdd={handleAdd} />
       <div className="space-y-2" role="list">
-        {visibleTodos.map((t) => (
+        {filteredTodos.map((t) => (
           <TodoItem
             key={t.id}
             todo={t}
