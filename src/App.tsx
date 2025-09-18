@@ -52,7 +52,7 @@ export default function App() {
         />
       </div>
       <TodoComposer onAdd={handleAdd} />
-      <div className="space-y-2" role="list">
+      <div className="space-y-2 h-80 overflow-auto" role="list">
         {filteredTodos.map((t) => (
           <TodoItem
             key={t.id}
