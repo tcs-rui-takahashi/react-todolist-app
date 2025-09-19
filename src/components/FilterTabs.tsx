@@ -1,5 +1,5 @@
 import { cn } from "../lib/cn";
-import type { FilterCounts, FilterTab } from "../types/filter";
+import { FilterTab, type FilterCounts } from "../types/filter";
 
 type Props = {
   active: FilterTab;
@@ -8,9 +8,9 @@ type Props = {
 };
 
 const TABS: { key: FilterTab; label: string }[] = [
-  { key: "all", label: "ALL" },
-  { key: "active", label: "Active" },
-  { key: "completed", label: "Completed" },
+  { key: FilterTab.All, label: "ALL" },
+  { key: FilterTab.Active, label: "Active" },
+  { key: FilterTab.Completed, label: "Completed" },
 ];
 
 export default function FilterTabs({ active, onChange, counts }: Props) {

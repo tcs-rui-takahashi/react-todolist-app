@@ -1,13 +1,15 @@
-import type { FilterTab, FilterCounts } from "../types/filter";
+import { FilterTab, type FilterCounts } from "../types/filter";
 import type { Todo } from "../types/todo";
 
 export function applyFilter(todos: Todo[], tab: FilterTab): Todo[] {
   switch (tab) {
-    case "active":
+    case FilterTab.Active:
       return todos.filter((t) => !t.completed);
-    case "completed":
+    case FilterTab.Completed:
       return todos.filter((t) => t.completed);
-    case "all":
+    case FilterTab.All:
+      return todos;
+    default:
       return todos;
   }
 }
