@@ -19,6 +19,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
       <legend className="sr-only">Filter todos</legend>
 
       {TABS.map(({ key, label }) => {
+        const isActive = active === key;
         const badge =
           counts && typeof counts[key] === "number" ? counts[key] : undefined;
 
@@ -29,7 +30,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
               type="radio"
               name="todo-filter"
               value={key}
-              checked={active === key}
+              checked={isActive}
               onChange={() => onChange(key)}
               className="peer sr-only"
             />
@@ -47,9 +48,12 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
               {typeof badge === "number" && (
                 <span
                   className={cn(
-                    "ml-2 inline-block min-w-6 px-1.5 text-center text-xs rounded-lg",
-                    "peer-checked:bg-blue-600 peer-checked:text-white",
-                    "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                    "badge ml-2 inline-block min-w-6 px-1.5 text-center text-xs rounded-lg",
+                    "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200",
+                    "badge ml-2 inline-block min-w-6 px-1.5 text-center text-xs rounded-lg",
+                    isActive
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
                   )}
                   aria-hidden="true"
                 >
