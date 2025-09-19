@@ -23,7 +23,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
         const badge = counts ? counts[key] : undefined;
 
         return (
-          <div key={key} className="relative">
+          <div key={key}>
             <input
               id={`filter-${key}`}
               type="radio"
@@ -47,9 +47,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
               {badge !== undefined && (
                 <span
                   className={cn(
-                    "badge ml-2 inline-block min-w-6 px-1.5 text-center text-xs rounded-lg",
-                    "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200",
-                    "badge ml-2 inline-block min-w-6 px-1.5 text-center text-xs rounded-lg",
+                    "ml-2 inline-block min-w-[1.5rem] px-1.5 text-center text-xs rounded-lg",
                     isActive
                       ? "bg-blue-600 text-white"
                       : "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
