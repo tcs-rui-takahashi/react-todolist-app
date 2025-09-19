@@ -1,10 +1,10 @@
 import { cn } from "../lib/cn";
-import type { FilterTab } from "../types/filter";
+import type { FilterCounts, FilterTab } from "../types/filter";
 
 type Props = {
   active: FilterTab;
   onChange: (next: FilterTab) => void;
-  counts?: { all: number; active: number; completed: number };
+  counts?: FilterCounts;
 };
 
 const TABS: { key: FilterTab; label: string }[] = [
@@ -20,8 +20,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
 
       {TABS.map(({ key, label }) => {
         const isActive = active === key;
-        const badge =
-          counts && typeof counts[key] === "number" ? counts[key] : undefined;
+        const badge = counts ? counts[key] : undefined;
 
         return (
           <div key={key} className="relative">
@@ -45,7 +44,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
               )}
             >
               <span>{label}</span>
-              {typeof badge === "number" && (
+              {badge !== undefined && (
                 <span
                   className={cn(
                     "badge ml-2 inline-block min-w-6 px-1.5 text-center text-xs rounded-lg",

@@ -1,4 +1,4 @@
-import type { FilterTab } from "../types/filter";
+import type { FilterTab, FilterCounts } from "../types/filter";
 import type { Todo } from "../types/todo";
 
 export function applyFilter(todos: Todo[], tab: FilterTab): Todo[] {
@@ -12,7 +12,7 @@ export function applyFilter(todos: Todo[], tab: FilterTab): Todo[] {
   }
 }
 
-export function countByFilter(todos: Todo[]) {
+export function countByFilter(todos: Todo[]): FilterCounts {
   const all = todos.length;
   const active = todos.reduce((acc, t) => acc + (t.completed ? 0 : 1), 0);
   const completed = all - active;
