@@ -20,7 +20,7 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
 
       {TABS.map(({ key, label }) => {
         const isActive = active === key;
-        const badge = counts ? counts[key] : undefined;
+        const badge = counts?.[key];
 
         return (
           <div key={key}>
