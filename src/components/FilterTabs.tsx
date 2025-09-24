@@ -14,8 +14,15 @@ const TABS: { key: FilterTab; label: string }[] = [
 ];
 
 export default function FilterTabs({ active, onChange, counts }: Props) {
+  const left = counts?.active ?? 0;
+  let leftLabel;
+  if (left === 1) {
+    leftLabel = `${left} item left`;
+  } else {
+    leftLabel = `${left} items left`;
+  }
   return (
-    <fieldset className="flex items-center gap-2">
+    <fieldset className="flex items-center gap-2 w-full">
       <legend className="sr-only">Filter todos</legend>
 
       {TABS.map(({ key, label }) => {
@@ -61,6 +68,12 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
           </div>
         );
       })}
+      <span
+        aria-live="polite"
+        className="ml-auto text-sm text-gray-500 dark:text-gray-400"
+      >
+        {leftLabel}
+      </span>
     </fieldset>
   );
 }
