@@ -13,9 +13,22 @@ const TABS: { key: FilterTab; label: string }[] = [
   { key: FilterTab.Completed, label: "Completed" },
 ];
 
+function getLeftLabel(left: number): string {
+  if (left === 0) {
+    return "All done!";
+  }
+  if (left === 1) {
+    return "1 item left";
+  }
+  return `${left} items left`;
+}
+
 export default function FilterTabs({ active, onChange, counts }: Props) {
+  const left = counts?.active ?? 0;
+  const leftLabel = getLeftLabel(left);
+
   return (
-    <fieldset className="flex items-center gap-2">
+    <fieldset className="flex items-center gap-2 w-full">
       <legend className="sr-only">Filter todos</legend>
 
       {TABS.map(({ key, label }) => {
@@ -61,6 +74,12 @@ export default function FilterTabs({ active, onChange, counts }: Props) {
           </div>
         );
       })}
+      <span
+        aria-live="polite"
+        className="ml-auto text-sm text-gray-500 dark:text-gray-400"
+      >
+        {leftLabel}
+      </span>
     </fieldset>
   );
 }
