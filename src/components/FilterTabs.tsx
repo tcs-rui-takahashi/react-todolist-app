@@ -13,14 +13,20 @@ const TABS: { key: FilterTab; label: string }[] = [
   { key: FilterTab.Completed, label: "Completed" },
 ];
 
+function getLeftLabel(left: number): string {
+  if (left === 0) {
+    return "All done!";
+  }
+  if (left === 1) {
+    return "1 item left";
+  }
+  return `${left} items left`;
+}
+
 export default function FilterTabs({ active, onChange, counts }: Props) {
   const left = counts?.active ?? 0;
-  let leftLabel;
-  if (left === 1) {
-    leftLabel = `${left} item left`;
-  } else {
-    leftLabel = `${left} items left`;
-  }
+  const leftLabel = getLeftLabel(left);
+
   return (
     <fieldset className="flex items-center gap-2 w-full">
       <legend className="sr-only">Filter todos</legend>
