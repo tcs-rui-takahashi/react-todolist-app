@@ -5,17 +5,21 @@ import FilterTabs from "./components/FilterTabs";
 import { applyFilter, countByFilter } from "./utils/filters";
 import type { Todo } from "./types/todo";
 import type { FilterTab } from "./types/filter";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 export default function App() {
-  const [todos, setTodos] = useState<Todo[]>([
-    {
-      id: crypto.randomUUID(),
-      title: "Build TodoItem skeleton",
-      completed: false,
-    },
-    { id: crypto.randomUUID(), title: "Wire callbacks", completed: true },
-    { id: crypto.randomUUID(), title: "Render with map()", completed: false },
-  ]);
+  const initialTodos = () =>
+    [
+      {
+        id: crypto.randomUUID(),
+        title: "Build TodoItem skeleton",
+        completed: false,
+      },
+      { id: crypto.randomUUID(), title: "Wire callbacks", completed: true },
+      { id: crypto.randomUUID(), title: "Render with map()", completed: false },
+    ] satisfies Todo[];
+
+  const [todos, setTodos] = useLocalStorage<Todo[]>("todos:v1", initialTodos);
 
   const [filter, setFilter] = useState<FilterTab>("all");
 
