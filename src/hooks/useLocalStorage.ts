@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 
-const isBrowser = typeof window !== "undefined";
-
 const isFn = <T>(v: T | (() => T)): v is () => T => typeof v === "function";
 
 function resolveInitial<T>(initial: T | (() => T)): T {
@@ -9,7 +7,6 @@ function resolveInitial<T>(initial: T | (() => T)): T {
 }
 
 function readFromStorage<T>(key: string, fallback: T): T {
-  if (!isBrowser) return fallback;
   const storedValue = window.localStorage.getItem(key);
   if (storedValue === null) return fallback;
   try {
@@ -34,7 +31,6 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   }, [key]);
 
   useEffect(() => {
-    if (!isBrowser) return;
     try {
       if (value === undefined) {
         localStorage.removeItem(key);
