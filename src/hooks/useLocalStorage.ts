@@ -1,10 +1,4 @@
-import { useEffect, useState, useRef } from "react";
-
-const isFn = <T>(v: T | (() => T)): v is () => T => typeof v === "function";
-
-function resolveInitial<T>(initial: T | (() => T)): T {
-  return isFn(initial) ? initial() : initial;
-}
+import { useEffect, useState } from "react";
 
 function readFromStorage<T>(key: string, fallback: T): T {
   const storedValue = window.localStorage.getItem(key);
@@ -15,20 +9,18 @@ function readFromStorage<T>(key: string, fallback: T): T {
     if (import.meta.env.MODE !== "production") {
       console.warn("[useLocalStorage] parse failed", e);
     }
+    return fallback;
   }
-  return fallback;
 }
 
-export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
-  const initialRef = useRef<T>(resolveInitial(initialValue));
-
+export function useLocalStorage<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() =>
-    readFromStorage<T>(key, initialRef.current)
+    readFromStorage<T>(key, initialValue)
   );
 
   useEffect(() => {
-    setValue(readFromStorage<T>(key, initialRef.current));
-  }, [key]);
+    setValue(readFromStorage<T>(key, initialValue));
+  }, [key, initialValue]);
 
   useEffect(() => {
     try {
