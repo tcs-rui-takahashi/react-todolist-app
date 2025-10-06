@@ -19,10 +19,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   );
 
   useEffect(() => {
-    setValue(readFromStorage<T>(key, initialValue));
-  }, [key, initialValue]);
-
-  useEffect(() => {
     try {
       if (value === undefined) {
         localStorage.removeItem(key);
