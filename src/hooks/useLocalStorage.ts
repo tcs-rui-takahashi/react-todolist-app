@@ -13,10 +13,14 @@ function readFromStorage<T>(key: string, fallback: T): T {
   }
 }
 
-export function useLocalStorage<T>(key: string, initialValue: T) {
-  const [value, setValue] = useState<T>(() =>
-    readFromStorage<T>(key, initialValue)
-  );
+export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
+  const [value, setValue] = useState<T>(() => {
+    const fallback =
+      typeof initialValue === "function"
+        ? (initialValue as () => T)()
+        : initialValue;
+    return readFromStorage<T>(key, fallback);
+  });
 
   useEffect(() => {
     try {
