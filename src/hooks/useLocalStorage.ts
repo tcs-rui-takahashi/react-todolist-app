@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 
-function readFromStorage<T>(key: string, fallback: T): T {
-  const storedValue = window.localStorage.getItem(key);
-  if (storedValue === null) return fallback;
+function readFromStorage<T>(key: string, getFallback: () => T): T {
   try {
-    return JSON.parse(storedValue) as T;
+    const storedValue =
+      typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
+    if (storedValue !== null) return JSON.parse(storedValue) as T;
   } catch (e) {
     if (import.meta.env.MODE !== "production") {
       console.warn("[useLocalStorage] parse failed", e);
     }
-    return fallback;
   }
+  return getFallback();
 }
 
 export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
-  const [value, setValue] = useState<T>(() => {
-    const fallback =
+  const [value, setValue] = useState<T>(() =>
+    readFromStorage<T>(key, () =>
       typeof initialValue === "function"
         ? (initialValue as () => T)()
-        : initialValue;
-    return readFromStorage<T>(key, fallback);
-  });
+        : initialValue
+    )
+  );
 
   useEffect(() => {
     try {
