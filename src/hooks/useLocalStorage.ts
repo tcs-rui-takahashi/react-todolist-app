@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function readFromStorage<T>(key: string, getFallback: () => T): T {
+function readFromStorage<T>(key: string, fallback: T | (() => T)): T {
   try {
     const storedValue =
       typeof window !== "undefined" ? window.localStorage.getItem(key) : null;
@@ -10,16 +10,12 @@ function readFromStorage<T>(key: string, getFallback: () => T): T {
       console.warn("[useLocalStorage] parse failed", e);
     }
   }
-  return getFallback();
+  return typeof fallback === "function" ? (fallback as () => T)() : fallback;
 }
 
 export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   const [value, setValue] = useState<T>(() =>
-    readFromStorage<T>(key, () =>
-      typeof initialValue === "function"
-        ? (initialValue as () => T)()
-        : initialValue
-    )
+    readFromStorage<T>(key, initialValue)
   );
 
   useEffect(() => {
